@@ -1,0 +1,13 @@
+提交工单:
+  method: 'Post'
+  url: '/general/v3/workorder'
+  headers: {
+    "Content-Type": 'application/json',
+    "Content-Length": "280",
+    "x-broker-id": "11000"
+  }
+  data: {
+    "type": "operation",
+    "title": "bfbfb",
+    "description": ""
+  }

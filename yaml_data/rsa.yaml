@@ -1,0 +1,16 @@
+登陆前获取RSA密钥:
+  method: 'Get'
+  url: '/common/v2/encrypt/public-key?operateType=login'
+  headers: {
+    "x-forwarded-for": "192.168.10.38",
+    "Content-Type": "application/json",
+    "x-device-code": "75fqLcKd7g1750918429835"
+  }
+
+
+登陆后获取RSA密钥:
+  method: 'Get'
+  url: '/common/v2/encrypt/public-key?operateType=${operateType}'
+  data: {
+    "operateType": "operation"
+  }

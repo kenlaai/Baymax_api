@@ -1,0 +1,9 @@
+获取账户列表:
+  method: 'Get'
+  url: '/account/v6/status/list'
+  headers: { "x-forwarded-for": "192.168.10.38",
+             "Content-Type": "application/json" }
+  data: ''
+  expected:
+    code: 0
+    success: true
