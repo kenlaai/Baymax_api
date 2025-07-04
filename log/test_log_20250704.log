@@ -1,0 +1,4 @@
+2025-07-04 14:35:23,230 : conftest.py - line:9 - INFO -→ 
+ ==========================在所有用例执行之前，生成token============================
+2025-07-04 14:35:24,527 : deal_token.py - line:43 - INFO -→ Token successfully saved to C:\Users\PC\test_api\Baymax_api\yaml_data\access_token.yaml
+2025-07-04 14:35:24,956 : test_open_account.py - line:20 - INFO -→ {'code': 0, 'success': True, 'data': [{'brokerId': 11000, 'brokerName': 'Baymax', 'brokerSimpleName': 'Baymax', 'brokerLogo': '/common/v1/storage/download/sc-xfsa-oyt1atjcl.png', 'brokerCode': 'DFAL', 'accountStatus': 'enable', 'omnibusAccountId': 'A0000000104', 'isChoose': True}, {'brokerId': 12000, 'brokerName': 'Baymax(DFID)', 'brokerSimpleName': 'Baymax(DFID)', 'brokerLogo': '/common/v1/storage/download/sc-wrdi-lpczk3l7a.png', 'brokerCode': 'DFID', 'accountStatus': 'enable', 'omnibusAccountId': 'A0000000198', 'isChoose': False}], 'msg': 'success', 'traceId': 'Ignored_Trace'}

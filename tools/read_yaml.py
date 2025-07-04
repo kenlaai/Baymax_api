@@ -12,6 +12,7 @@ class ReadYaml(object):
 
     def read_yaml(self,file_path):
         with open(self.get_path + "/yaml_data/" + file_path, 'r', encoding='utf-8') as file:
+            # print(file)
             data = yaml.safe_load(file)
 
         return data
@@ -48,5 +49,5 @@ class ReadYaml(object):
 
 
 if __name__ == "__main__":
-    data = ReadYaml().get_url('open_account.yaml', 'account')
+    data = ReadYaml().read_yaml('open_account.yaml')
     print(data)

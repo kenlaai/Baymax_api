@@ -5,7 +5,6 @@
     "Content-Type": 'application/json',
     "Content-Length": "280",
     "x-device-code": "75fqLcKd7g1750918429835"
-
   }
   data: {
     "username": "qsir@163.com",

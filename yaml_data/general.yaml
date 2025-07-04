@@ -4,10 +4,26 @@
   headers: {
     "Content-Type": 'application/json',
     "Content-Length": "280",
-    "x-broker-id": "11000"
+    "x-broker-id": "11000",
+    "Authorization": ""
   }
   data: {
     "type": "operation",
     "title": "bfbfb",
+    "description": ""
+  }
+
+提交工单-1:
+  method: 'Post'
+  url: '/general/v3/workorder'
+  headers: {
+    "Content-Type": 'application/json',
+    "Content-Length": "280",
+    "x-broker-id": "11000",
+    "Authorization": ""
+  }
+  data: {
+    "type": "operation",
+    "title": "bfbfbfdsfsdfsdfsdfsdfsdfsd",
     "description": ""
   }

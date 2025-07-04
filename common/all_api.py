@@ -4,7 +4,8 @@ import json
 from Crypto.Cipher import PKCS1_v1_5
 from Crypto.PublicKey import RSA
 
-from common.login import Header
+from common.deal_token import write_token, read_token
+# from common.login import Header
 from tools.read_yaml import ReadYaml
 from common.http_service import RunMethod
 from tools.get_log import logs
@@ -16,21 +17,25 @@ class AllApi(object):
         self.read = ReadYaml()
         self.run = RunMethod()
         self.logger = logs
-        self.header = Header()
+        # self.header = Header()
 
-    def send_request(self, file_path, api_name, data= None):
+
+
+    def send_request(self, file_path, api_name,headers= None ,data= None):
         try:
 
             method = self.read.get_method(file_path, api_name)
             url = self.read.get_url(file_path, api_name)
             headers = self.read.get_header(file_path, api_name)
             if method == 'Get':
-                headers["jsid"] = self.header.a_login()
+                # headers["jsid"] = self.header.a_login()
+                headers['jsid'] = read_token()
                 response = self.run.run_main(method, url, headers)
             elif method == 'Post':
                 if data is None:
                     data = self.read.get_data(file_path, api_name)
-                headers["jsid"] = self.header.a_login()
+                # headers["jsid"] = self.header.a_login()
+                headers['jsid'] = read_token()
                 response = self.run.run_main(method, url, headers, json.dumps(data))
             elif method == 'Put':
                 data = self.read.get_data(file_path, api_name)
@@ -74,13 +79,33 @@ class AllApi(object):
         return result
 
     def get_rsa_public_key(self, password):
-        res = AllApi().send_request(file_path="rsa.yaml", api_name="登陆前获取RSA密钥")
+        headers = ReadYaml().get_header(file_path="rsa.yaml", api_name="登陆前获取RSA密钥")
+        res = AllApi().send_request(file_path="rsa.yaml", api_name="登陆前获取RSA密钥",headers=headers)
         rsa_public_key = res['data']['publicKey']
         e_password = AllApi().rsa_encrypt(rsa_public_key, password)
         return e_password
 
+    def user_login(self, file_path, api_name, password):
+        try:
+            method = self.read.get_method(file_path, api_name)
+            url = self.read.get_url(file_path, api_name)
+            headers = self.read.get_header(file_path, api_name)
+            data = self.read.get_data(file_path, api_name)
+            data['password'] = AllApi().get_rsa_public_key(password)
+            response = self.run.run_main(method, url, headers, json.dumps(data))
+            print(response)
+
+            write_token(response)
+            #
+            # print(json.dumps(response, indent=2, ensure_ascii=False, sort_keys=False))
+            return response
+        except Exception as e:
+            logs.logger.info("接口访问出错啦~ %s" % e)
+
+
+
 
 
 if __name__ == "__main__":
-    data = AllApi().get_rsa_public_key(password="Aa123456")
+    data = AllApi().user_login(file_path="user_login.yaml",api_name="用户密码登录", password="Aa123456")
     print(data)
